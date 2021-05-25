@@ -30,86 +30,45 @@ class SmashHitsTests: XCTestCase {
         }
     }
 
-//  func testServiceHost() throws {
-//    let servicePath = URL(string:ServiceURLList.AppleTop100.rawValue)
-//    XCTAssertEqual(servicePath!.host, URL(string:"apple.com"))
-//  }
-
-    func testServiceBaseURL() throws {
-        guard let servicePath = URL(string:ServiceURLList.AppleTop100.rawValue)
-        else {
-            return
+    func testTopHitsServiceHost() throws {
+        var host = ""
+        if let top100URL = URL(string:ServiceURLList.AppleTop100.rawValue) {
+            host = top100URL.host ?? ""
         }
-        //XCTAssertEqual(servicePath!.baseURL, URL(string:"apple.com"))
-        let appleURL = URL(string:"apple.com")
-        XCTAssertEqual(servicePath.baseURL!, appleURL!)
+        XCTAssertEqual(host, "apple.com")
     }
-
-    func testJSONHost() throws {
-      let cachePath = ServiceURLList.AppleTop100.rawValue
-      guard let url = URL(string:ServiceURLList.AppleTop100.rawValue) else {
-        return
-      }
-      do {
-        try "sampletext".write(toFile:cachePath, atomically:false, encoding:String.Encoding.utf8)
-      } catch {
-        print(error)
-      }
-      
-//      //host, baseURL
-//      print(cachePath)
-//      XCTAssertEqual(cachePath.host, URL(string:"apple.com"))
-    }
-
+    
     func testCachePathExists() throws {
-      let cachePath = "cache".buildCachePath()
-      //let cachePath = "cache".buildCachePath()
-      XCTAssertEqual(cachePath, URL(string:"apple.com"))
+        let cachePath = "cache".buildCachePath()
+        XCTAssertNotEqual(cachePath, "")
     }
 
-//  StringProtocol
-//  func testCanWriteToCache() throws {
-//    let cachePath = "cache".buildCachePath()
-//      do {
-//        try "sampletext".write(toFile:cachePath, atomically:false, encoding:String.Encoding.utf8)
-//      } catch {
-//        print(error)
-//      }
-//  }
-        
-//  func testContentView() throws {
-//      let contentView = ContentView()
-//      XCTAssertNoThrow(try contentView.inspect().group().text(0))
-//  }
+    
+    func testWriteCache() throws {
+        let writeString:String = "cache-write-test"
+        let cachePath = "cache".buildCachePath()
+        do {
+            try writeString.write(toFile:cachePath, atomically:false, encoding:String.Encoding.utf8)
+        } catch {
+            print(error)
+        }
+        let readString = try String(contentsOfFile:cachePath, encoding: .utf8)
+        XCTAssertEqual(writeString, readString)
+     }
   
+    func testAuthor() throws {
+        let author = Author(name: "John")
+        XCTAssertEqual(author.name, "John")
+    }
 
-  func testCString() throws {
-      let contentView = ContentView()
-//    func getCString(inout [CChar], maxLength: Int, encoding: String.Encoding) -> Bool
-//      XCTAssertNoThrow(try contentView.inspect().group().text(0))
-  }
-
-  
-//  func testAuthor() throws {
-//      let author = Author (
-//          name: "John"
-//      )
-//      let data = try author.encode()
-//      let decodedAuthor = try data.decoded() as Author
-//    //XCTAssertEqual(author, decodedAuthor)
-//    XCTAssertEqual(author.name, "John")
-//  }
-  
-//  func testReorderingOfSmallerIntegersFirst() {
-//      var numbers = [5,2,3]
-//      numbers.sort { (lhs: Comparable, rhs: Comparable) -> Bool in
-//          return lhs < rhs
-//      }
-//      print(numbers)
-//      XCTAssertEqual(values, [2, 3, 5],
-//          "Expected \(values) to equal [2, 3, 5]")
-//  }
-  
+//    func testAuthorEncodeDecode() throws {
+//        let author = Author (
+//            name: "John"
+//        )
+//        let data = try author.encode()
+//        let decodedAuthor = try data.decoded() as Author
+//        XCTAssertEqual(author, decodedAuthor)
+//    }
 
 //    func test_contentLoad() throws {
 //        let contentView = ContentView()

@@ -256,6 +256,7 @@
 					};
 					84C8A33B265599A0004B5323 = {
 						CreatedOnToolsVersion = 12.3;
+						TestTargetID = 84C8A31A2655999E004B5323;
 					};
 				};
 			};
@@ -581,6 +582,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SmashHits;
 			};
 			name = Debug;
 		};
@@ -601,6 +603,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SmashHits;
 			};
 			name = Release;
 		};

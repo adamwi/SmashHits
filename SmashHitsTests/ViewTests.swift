@@ -10,34 +10,25 @@ import Foundation
 import XCTest
 @testable import SmashHits
 
-//struct ContentView: View {
-//    var body: some View {
-//        Text("ViewTests")
-//    }
-//}
-
 class ViewTests: XCTestCase {
     
     var app = XCUIApplication()
 
-    func testContentView() throws {
-        let mainContent = ContentView()
+    func testStaticTextsAreNotEmpty() throws {
         let message = app.staticTexts["View in iTunes Store"]
+        print("message \(message)")
         let fields = app.textFields["name"]
-        XCTAssertEqual(message, fields)
+        print("fields \(fields)")
+        XCTAssertNotEqual(message, fields)
     }
 
+    func testTextFieldsExist() throws {
+        let fields:XCUIElement = app.textFields["name"]
+        XCTAssert(fields.exists)
+    }
 
-
-//    func testVStackOfTexts() throws {
-//        let view = VStack {
-//            Text("1")
-//            Text("2")
-//            Text("3")
-//        }
-//        let values = try view.inspect().map { try $0.text().string() }
-//        print(values)
-//        XCTAssertEqual(values, ["1", "2", "3"])
-//    }
-
+    func testStaticTextsExist() throws {
+        let texts:XCUIElement = app.staticTexts["View in iTunes Store"]
+        XCTAssert(texts.exists)
+    }
 }
